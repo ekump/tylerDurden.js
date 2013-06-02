@@ -11,11 +11,16 @@
 		}, options);
 		itemToBeReplaced = this;
 		var originalBgImage = $(itemToBeReplaced).css('background-image');
+		var originalNoRepeat = $(itemToBeReplaced).css('background-repeat');
+		var originalPosition = $(itemToBeReplaced).css('background-position');
+		var originalZ = $(itemToBeReplaced).css('z-index');
+		var originalSize = $(itemToBeReplaced).css('background-size');		
+
 		if(settings.repeat){
-			window.setInterval(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition)},timeRandomizer(settings.minTime,settings.maxTime));			
+			window.setInterval(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize)},timeRandomizer(settings.minTime,settings.maxTime));			
 		}
 		else{
-			window.setTimeout(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition)}, timeRandomizer(settings.minTime,settings.maxTime));
+			window.setTimeout(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize)}, timeRandomizer(settings.minTime,settings.maxTime));
 		}
 		return this;
 	};
@@ -25,8 +30,13 @@
 		return Math.random() * (max - min) + min;
 	};
 	/*quickly swap out the desired object with our pic*/
-	var mayhem = function(exposureTime,imageUrl,originalBgImage,originalNoRepeat,originalPosition){
+	var mayhem = function(exposureTime,imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize){
 		$(itemToBeReplaced).css('background-image', 'url(' + imageUrl + ')');
+		$(itemToBeReplaced).css('z-index',100000);
+		$(itemToBeReplaced).css('background-repeat','no-repeat');
+		$(itemToBeReplaced).css('background-position','center');
+		$(itemToBeReplaced).css('background-size','contain');
+
 	 	window.setTimeout(function() 
 	 		{
 	 				if(originalBgImage == 'none'){
@@ -34,6 +44,18 @@
 	 				}
 	 				else{
 	 					$(itemToBeReplaced).css('background-image',originalBgImage);
+	 					if(originalNoRepeat.length >0 ){
+	 						$(itemToBeReplaced).css('background-repeat',originalNoRepeat);	
+	 					}
+	 					if(originalPosition.length >0 ){
+	 						$(itemToBeReplaced).css('background-position',originalPosition);	
+	 					}
+	 					if(originalZ.length >0 ){
+	 						$(itemToBeReplaced).css('z-index',originalZ);	
+	 					}
+	 					if(originalSize.length >0 ){
+	 						$(itemToBeReplaced).css('background-size',originalSize);	
+	 					}	 							 						 					
 	 				}			
 	 		}
 	 		,exposureTime);
