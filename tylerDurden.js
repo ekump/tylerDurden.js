@@ -33,7 +33,7 @@
 	 					$(itemToBeReplaced).css('background-image','none');
 	 				}
 	 				else{
-	 					$(itemToBeReplaced).css('background-image','url(' + originalBgImage + ')');
+	 					$(itemToBeReplaced).css('background-image',originalBgImage);
 	 				}			
 	 		}
 	 		,exposureTime);
