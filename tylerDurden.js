@@ -10,19 +10,12 @@
 			imageUrl: "http://www.lolroflmao.com/wp-content/uploads/2011/12/motherfucking-game.png"
 		}, options);
 		itemToBeReplaced = this;
-		var itemToBeReplacedParent = $(itemToBeReplaced).parent();
-		var leImage = $('<img id="tylerDurdenImage">');
-		leImage.attr('src',settings.imageUrl);
-		durdenDiv = $('<div id="durdenDiv">');
-		var durdenCss = {};
-		leImage.appendTo(durdenDiv);
-		durdenDiv.appendTo(itemToBeReplacedParent);
-		$(durdenDiv).hide();
+		var originalBgImage = $(itemToBeReplaced).css('background-image');
 		if(settings.repeat){
-			window.setInterval(function(){mayhem(settings.exposureTime)},timeRandomizer(settings.minTime,settings.maxTime));			
+			window.setInterval(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition)},timeRandomizer(settings.minTime,settings.maxTime));			
 		}
 		else{
-			window.setTimeout(mayhem, timeRandomizer(settings.minTime,settings.maxTime));
+			window.setTimeout(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition)}, timeRandomizer(settings.minTime,settings.maxTime));
 		}
 		return this;
 	};
@@ -32,14 +25,16 @@
 		return Math.random() * (max - min) + min;
 	};
 	/*quickly swap out the desired object with our pic*/
-	var mayhem = function(exposureTime){
-		var parent = $(itemToBeReplaced).parent();
-	 	$(itemToBeReplaced).hide();
-	 	$(durdenDiv).show();
+	var mayhem = function(exposureTime,imageUrl,originalBgImage,originalNoRepeat,originalPosition){
+		$(itemToBeReplaced).css('background-image', 'url(' + imageUrl + ')');
 	 	window.setTimeout(function() 
 	 		{
-	 			$(itemToBeReplaced).show();
-	 			$(durdenDiv).hide();
+	 				if(originalBgImage == 'none'){
+	 					$(itemToBeReplaced).css('background-image','none');
+	 				}
+	 				else{
+	 					$(itemToBeReplaced).css('background-image','url(' + originalBgImage + ')');
+	 				}			
 	 		}
 	 		,exposureTime);
 	 	return this;
