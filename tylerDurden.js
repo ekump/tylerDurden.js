@@ -5,6 +5,8 @@
 		var settings = $.extend({
 			minTime: 1000,
 			maxTime: 5000,
+			exposureTime: 150,
+			repeat: false,
 			imageUrl: "http://www.lolroflmao.com/wp-content/uploads/2011/12/motherfucking-game.png"
 		}, options);
 		itemToBeReplaced = this;
@@ -12,10 +14,16 @@
 		var leImage = $('<img id="tylerDurdenImage">');
 		leImage.attr('src',settings.imageUrl);
 		durdenDiv = $('<div id="durdenDiv">');
+		var durdenCss = {};
 		leImage.appendTo(durdenDiv);
 		durdenDiv.appendTo(itemToBeReplacedParent);
 		$(durdenDiv).hide();
-		window.setTimeout(mayhem, timeRandomizer(settings.minTime,settings.maxTime));		
+		if(settings.repeat){
+			window.setInterval(function(){mayhem(settings.exposureTime)},timeRandomizer(settings.minTime,settings.maxTime));			
+		}
+		else{
+			window.setTimeout(mayhem, timeRandomizer(settings.minTime,settings.maxTime));
+		}
 		return this;
 	};
 
@@ -24,7 +32,7 @@
 		return Math.random() * (max - min) + min;
 	};
 	/*quickly swap out the desired object with our pic*/
-	var mayhem = function(){
+	var mayhem = function(exposureTime){
 		var parent = $(itemToBeReplaced).parent();
 	 	$(itemToBeReplaced).hide();
 	 	$(durdenDiv).show();
@@ -33,7 +41,7 @@
 	 			$(itemToBeReplaced).show();
 	 			$(durdenDiv).hide();
 	 		}
-	 		,100);
+	 		,exposureTime);
 	 	return this;
 	};
 }(jQuery));
