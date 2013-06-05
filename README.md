@@ -6,11 +6,10 @@ Do you wish you could be just like Tyler Durden from Fight Club and splice singl
 
 How To Use
 ----------
-
 After including tylerDurden.js in your site you can apply it like so:
 <br>
-`$("body").tylerDurden({
-	imageUrl: 'a link to a must un-polite image'
+`$('body').tylerDurden({<br>
+	imageUrl: 'a link to a must un-polite image'<br>
 });`
 
 Feel free to swap out the "body" with any dom element of your chosing that supports background images.
