@@ -13,3 +13,13 @@ After including tylerDurden.js in your site you can apply it like so:
 });`
 
 Feel free to swap out the "body" with any dom element of your chosing that supports background images.
+
+Options
+-------
+All options have default values but you'll want to set the below on your own.<br>
+
+minTime: lower bound of the random time window for splicing the image in milliseconds<br>
+maxTime: upper bound of the random time window for splicing the image in milliseconds<br>
+exposureTime: how long to show the image in milliseconds<br>
+repeat: true or false value for repeating the splice<br>
+imageUrl: the url of the image to be spliced<br>
