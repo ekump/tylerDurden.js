@@ -10,17 +10,18 @@
 			imageUrl: "http://www.lolroflmao.com/wp-content/uploads/2011/12/motherfucking-game.png"
 		}, options);
 		itemToBeReplaced = this;
-		var originalBgImage = $(itemToBeReplaced).css('background-image');
-		var originalNoRepeat = $(itemToBeReplaced).css('background-repeat');
-		var originalPosition = $(itemToBeReplaced).css('background-position');
-		var originalZ = $(itemToBeReplaced).css('z-index');
-		var originalSize = $(itemToBeReplaced).css('background-size');		
+		var originalValues {};
+		originalValues.bgImage = $(itemToBeReplaced).css('background-image');
+		originalValues.noRepeat = $(itemToBeReplaced).css('background-repeat');
+		originalValues.position = $(itemToBeReplaced).css('background-position');
+		originalValues.zIndex = $(itemToBeReplaced).css('z-index');
+		originalValues.imageSize = $(itemToBeReplaced).css('background-size');		
 
 		if(settings.repeat){
-			window.setInterval(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize)},timeRandomizer(settings.minTime,settings.maxTime));			
+			window.setInterval(function(){mayhem(settings.exposureTime,settings.imageUrl,originalValues)},timeRandomizer(settings.minTime,settings.maxTime));			
 		}
 		else{
-			window.setTimeout(function(){mayhem(settings.exposureTime,settings.imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize)}, timeRandomizer(settings.minTime,settings.maxTime));
+			window.setTimeout(function(){mayhem(settings.exposureTime,settings.imageUrl,originalValues)}, timeRandomizer(settings.minTime,settings.maxTime));
 		}
 		return this;
 	};
@@ -30,7 +31,7 @@
 		return Math.random() * (max - min) + min;
 	};
 	/*quickly swap out the desired object with our pic*/
-	var mayhem = function(exposureTime,imageUrl,originalBgImage,originalNoRepeat,originalPosition,originalZ,originalSize){
+	var mayhem = function(exposureTime,imageUrl,originalValues){
 		$(itemToBeReplaced).css('background-image', 'url(' + imageUrl + ')');
 		$(itemToBeReplaced).css('z-index',100000);
 		$(itemToBeReplaced).css('background-repeat','no-repeat');
@@ -39,22 +40,22 @@
 
 	 	window.setTimeout(function() 
 	 		{
-	 				if(originalBgImage == 'none'){
+	 				if(originalValues.bgImage == 'none'){
 	 					$(itemToBeReplaced).css('background-image','none');
 	 				}
 	 				else{
-	 					$(itemToBeReplaced).css('background-image',originalBgImage);
-	 					if(originalNoRepeat.length >0 ){
-	 						$(itemToBeReplaced).css('background-repeat',originalNoRepeat);	
+	 					$(itemToBeReplaced).css('background-image',originalValues.bgImage);
+	 					if(originalValues.noRepeat.length >0 ){
+	 						$(itemToBeReplaced).css('background-repeat',originalValues.noRepeat);	
 	 					}
-	 					if(originalPosition.length >0 ){
-	 						$(itemToBeReplaced).css('background-position',originalPosition);	
+	 					if(originalValues.position.length >0 ){
+	 						$(itemToBeReplaced).css('background-position',originalValues.position);	
 	 					}
-	 					if(originalZ.length >0 ){
-	 						$(itemToBeReplaced).css('z-index',originalZ);	
+	 					if(originalValues.zIndex.length >0 ){
+	 						$(itemToBeReplaced).css('z-index',originalValues.zIndex);	
 	 					}
-	 					if(originalSize.length >0 ){
-	 						$(itemToBeReplaced).css('background-size',originalSize);	
+	 					if(originalValues.imageSize.length >0 ){
+	 						$(itemToBeReplaced).css('background-size',originalValues.imageSize);	
 	 					}	 							 						 					
 	 				}			
 	 		}
