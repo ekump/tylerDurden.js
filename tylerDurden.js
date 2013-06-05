@@ -10,7 +10,7 @@
 			imageUrl: "http://www.lolroflmao.com/wp-content/uploads/2011/12/motherfucking-game.png"
 		}, options);
 		itemToBeReplaced = this;
-		var originalValues {};
+		var originalValues = new Object();
 		originalValues.bgImage = $(itemToBeReplaced).css('background-image');
 		originalValues.noRepeat = $(itemToBeReplaced).css('background-repeat');
 		originalValues.position = $(itemToBeReplaced).css('background-position');
